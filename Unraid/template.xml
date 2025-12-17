@@ -20,7 +20,7 @@
   <Config Name="Runtime" Target="runtime" Default="nvidia" Mode="" Description="Container Runtime für GPU-Zugriff (MUSS 'nvidia' sein)" Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="NVIDIA_VISIBLE_DEVICES" Target="NVIDIA_VISIBLE_DEVICES" Default="all" Mode="" Description="Welche GPUs verfügbar sind (z.B. 'all' oder GPU-UUID)" Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="NVIDIA_DRIVER_CAPABILITIES" Target="NVIDIA_DRIVER_CAPABILITIES" Default="all,compute,video,utility" Mode="" Description="NVIDIA Treiber-Fähigkeiten" Type="Variable" Display="always" Required="false" Mask="false"/>
-  <Config Name="--gpus" Target="--gpus" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">all</Config>
+  <Config Name="--gpus" Target="--gpus" Default="all" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">
   <!-- Standardvariablen -->
   <Config Name="TZ" Target="TZ" Default="Europe/Berlin" Mode="" Description="Zeitzone des Containers" Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Benutzer-ID (oft 99 für 'nobody')" Type="Variable" Display="advanced" Required="false" Mask="false"/>
