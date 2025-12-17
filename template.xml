@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Container version="2">
+  <Name>Jellyfin-Nvidia-CUDA12</Name>
+  <Repository>drshyper/jellyfin-nvidia-cuda12:latest</Repository>
+  <Registry>https://hub.docker.com/r/drshyper/jellyfin-nvidia-cuda12/</Registry>
+  <Network>host</Network>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/rbxxswap/Jellyfin-Nvidia-CUDA12</Support>
+  <Project>https://github.com/rbxxswap/Jellyfin-Nvidia-CUDA12</Project>
+  <Overview>⚠️ UNSUPPORTED COMMUNITY TEMPLATE ⚠️ - Jellyfin Media Server with full NVIDIA GPU support (CUDA 12.9.1) for hardware transcoding. Configure paths for your system! No support provided.</Overview>
+  <Category>MediaServer:Video</Category>
+  <WebUI>http://[IP]:[PORT:8096]/</WebUI>
+  <Icon>https://raw.githubusercontent.com/jellyfin/jellyfin/master/deployment/unraid/docker-templates/icon-jellyfin.png</Icon>
+
+  <Config Name="Config Path" Target="/config" Default="" Mode="rw" Description="⚠️ REQUIRED: Path to store Jellyfin config and data (e.g., /mnt/user/appdata/jellyfin-nvidia)" Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="Media Path" Target="/media" Default="" Mode="ro" Description="⚠️ REQUIRED: Path to your media library (e.g., /mnt/user/media)" Type="Path" Display="always" Required="true" Mask="false"/>
+
+  <Config Name="NVIDIA_VISIBLE_DEVICES" Target="NVIDIA_VISIBLE_DEVICES" Default="all" Mode="" Description="GPUs to expose to container (e.g., 'all' or GPU UUID)" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="NVIDIA_DRIVER_CAPABILITIES" Target="NVIDIA_DRIVER_CAPABILITIES" Default="all,compute,video,utility" Mode="" Description="NVIDIA driver capabilities" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="TZ" Target="TZ" Default="Europe/Berlin" Mode="" Description="Container timezone" Type="Variable" Display="always" Required="false" Mask="false"/>
+</Container>
