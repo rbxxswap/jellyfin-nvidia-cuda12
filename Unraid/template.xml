@@ -10,19 +10,18 @@
   <Overview>Jellyfin Media Server mit voller NVIDIA GPU-Unterstützung (CUDA 12.9.1). Template-Pfade sind leer - BEI DER ERSTINSTALLATION UNBEDINGT EIGENE PFADE EINTRAGEN.</Overview>
   <Category>MediaServer:Video</Category>
   <WebUI>http://[IP]:[PORT:8096]/</WebUI>
-  <ExtraParams>--runtime nvidia --gpus all</ExtraParams>
+  <!-- DAS ist der Schlüssel für die GPU -->
+  <ExtraParams>--runtime=nvidia --gpus=all</ExtraParams>
   <Icon>https://raw.githubusercontent.com/jellyfin/jellyfin/master/deployment/unraid/docker-templates/icon-jellyfin.png</Icon>
 
   <!-- PFADE: Default ist leer, muss bei Erstinstallation gesetzt werden -->
   <Config Name="Config Path" Target="/config" Mode="rw" Description="ERFORDERLICH: Pfad für Jellyfin Konfiguration (z.B. /mnt/user/appdata/jellyfin-nvidia)" Type="Path" Display="always" Required="true" Mask="false"/>
   <Config Name="Media Path" Target="/media" Mode="ro" Description="ERFORDERLICH: Pfad zur Medienbibliothek (z.B. /mnt/user/media)" Type="Path" Display="always" Required="true" Mask="false"/>
 
-  <!-- NVIDIA GPU-KONFIGURATION (KRITISCH) -->
-  <Config Name="Runtime" Target="runtime" Default="nvidia" Mode="" Description="Container Runtime für GPU-Zugriff (MUSS 'nvidia' sein)" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <!-- NVIDIA GPU-KONFIGURATION (Wichtig für die Treiberkommunikation im Container) -->
   <Config Name="NVIDIA_VISIBLE_DEVICES" Target="NVIDIA_VISIBLE_DEVICES" Default="all" Mode="" Description="Welche GPUs verfügbar sind (z.B. 'all' oder GPU-UUID)" Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="NVIDIA_DRIVER_CAPABILITIES" Target="NVIDIA_DRIVER_CAPABILITIES" Default="all,compute,video,utility" Mode="" Description="NVIDIA Treiber-Fähigkeiten" Type="Variable" Display="always" Required="false" Mask="false"/>
-  <!--<Config Name="--gpus" Target="--gpus" Default="all" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false"/>-->
-  
+
   <!-- Standardvariablen -->
   <Config Name="TZ" Target="TZ" Default="Europe/Berlin" Mode="" Description="Zeitzone des Containers" Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Benutzer-ID (oft 99 für 'nobody')" Type="Variable" Display="advanced" Required="false" Mask="false"/>
