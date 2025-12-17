@@ -4,16 +4,31 @@
 
 A Docker template for Jellyfin Media Server with full NVIDIA GPU support (CUDA 12.9.1), optimized for hardware transcoding on Unraid.
 
+  SUPPORTED GPUs (CUDA 12.9.1):
+    ✅ Maxwell (2014-2016): GTX 900 Series, Quadro M / K series
+       Examples: GTX 960, GTX 980 Ti, Quadro K2200, Quadro M4000
+    ✅ Pascal (2016-2017): GTX 1000 Series, Quadro P series  
+       Examples: GTX 1050 Ti, GTX 1080 Ti, Quadro P2000, Quadro P4000
+    ✅ Volta (2017-2018): Titan V, Quadro GV100
+    ✅ Turing (2018-2020): GTX 1600/RTX 2000 Series, Quadro RTX 4000-8000
+       Examples: GTX 1660, RTX 2060, RTX 2080 Ti, Quadro RTX 5000
+    ✅ Ampere (2020-2022): RTX 3000 Series, A-Series
+       Examples: RTX 3060, RTX 3090, A4000, A5000
+    ✅ Ada Lovelace (2022+): RTX 4000 Series
+       Examples: RTX 4060, RTX 4090, RTX 6000 Ada
+    
+    NOT SUPPORTED (requires CUDA 13+):
+    ❌ Hopper (2022+): H100, H200 - needs CUDA 13.x
+    ❌ Blackwell (2024+): B100, B200 - needs CUDA 13.x
+
 ## Prerequisites
-- Unraid 6.10+
+- Unraid 7.2.2
 - NVIDIA GPU with drivers installed (NVIDIA Driver plugin)
 - Docker image built and published to your registry (or use the provided one if available)
 
 ## Installation in Unraid (One-Click Method)
 
-1.  In your Unraid WebUI, go to the **"Apps"** tab.
-2.  **At the bottom of the "CA Apps Search" section**, click the link that says **"Click here to get more results from any Github template URL"**.
-    *(Screenshot for clarity: This link is below the search box and app list)*
+1.  wget -O /boot/config/plugins/dockerMan/templates-user/Jellyfin-Nvidia-CUDA12.xml https://github.com/rbxxswap/Jellyfin-Nvidia-CUDA12/raw/main/Unraid/template.xml
 3.  Paste the following **RAW GitHub URL** into the input field that appears:
     `https://github.com/rbxxswap/Jellyfin-Nvidia-CUDA12/raw/main/unraid/template.xml`
 4.  Click **"OK"** or **"Install"**.
