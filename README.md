@@ -3,6 +3,7 @@
 **⚠️ Disclaimer: This is an unsupported community template. Use at your own risk. No support will be provided. ⚠️**
 
 A Docker template for Jellyfin Media Server with full NVIDIA GPU support (CUDA 12.9.1), optimized for hardware transcoding on Unraid.
+-ffmpeg version 6.1.1
 
   SUPPORTED GPUs (CUDA 12.9.1):
     ✅ Maxwell (2014-2016): GTX 900 Series, Quadro M / K series

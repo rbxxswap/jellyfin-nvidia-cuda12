@@ -17,5 +17,5 @@
 
   <Config Name="NVIDIA_VISIBLE_DEVICES" Target="NVIDIA_VISIBLE_DEVICES" Default="all" Mode="" Description="GPUs to expose to container (e.g., 'all' or GPU UUID)" Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="NVIDIA_DRIVER_CAPABILITIES" Target="NVIDIA_DRIVER_CAPABILITIES" Default="all,compute,video,utility" Mode="" Description="NVIDIA driver capabilities" Type="Variable" Display="always" Required="false" Mask="false"/>
-  <Config Name="TZ" Target="TZ" Default="Europe/Berlin" Mode="" Description="Container timezone" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="TZ" Target="TZ" Default="Europe/Berlin" Mode="" Description="Container timezone override" Type="Variable" Display="always" Required="false" Mask="false"/>
 </Container>
