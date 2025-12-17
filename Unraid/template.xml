@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Container version="2">
   <Name>Jellyfin-Nvidia-CUDA12</Name>
-  <Repository>drshyper/jellyfin-nvidia-cuda12:latest</Repository>
+  <Repository>drshyper/jellyfin-nvidia-cuda12:diag</Repository>
   <Registry>https://hub.docker.com/r/drshyper/jellyfin-nvidia-cuda12/</Registry>
   <Network>host</Network>
   <Privileged>false</Privileged>
