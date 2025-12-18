@@ -1,22 +1,24 @@
 # Jellyfin-Nvidia-CUDA12 for Unraid
 
-**⚠️ Disclaimer: This is an unsupported community template. Use at your own risk. No support will be provided. ⚠️**
+**🌐 [Deutsche Version](README.de.md)**
+
+**⚠️ Disclaimer: This is an unsupported community template. Use at your own risk. ⚠️**
 
 A Docker image for Jellyfin Media Server with full NVIDIA GPU support (CUDA 12.9.1), optimized for hardware transcoding on Unraid.
 
 ## Image Variants
 
-| Tag | Beschreibung | Use Case |
-|-----|--------------|----------|
-| `:main` / `:latest` | Produktions-Image, direkter Jellyfin-Start | Normaler Betrieb |
-| `:debug` | Mit GPU-Diagnostik beim Start | Troubleshooting, Verifizierung |
-| `:mqtt` | Mit MQTT-Integration für Home Assistant | Smart Home Integration |
-| `:base` | Basis-Image (nicht direkt verwenden) | Nur für Builds |
+| Tag | Description | Use Case |
+|-----|-------------|----------|
+| `:main` / `:latest` | Production image, direct Jellyfin start | Normal operation |
+| `:debug` | With GPU diagnostics at startup | Troubleshooting |
+| `:mqtt` | Home Assistant integration | Smart Home (planned) |
+| `:base` | Base image (do not use directly) | Build only |
 
 ## Supported GPUs (CUDA 12.9.1)
 
-| Generation | Jahre | Beispiele | Status |
-|------------|-------|-----------|--------|
+| Generation | Years | Examples | Status |
+|------------|-------|----------|--------|
 | Maxwell | 2014-2016 | GTX 960, GTX 980 Ti, Quadro K2200 | ✅ |
 | Pascal | 2016-2017 | GTX 1050 Ti, GTX 1080 Ti, Quadro P4000 | ✅ |
 | Volta | 2017-2018 | Titan V, Quadro GV100 | ✅ |
@@ -36,7 +38,7 @@ jellyfin-nvidia-cuda12/
 │   └── Dockerfile         # Production variant
 ├── debug/
 │   ├── Dockerfile         # Debug variant with diagnostics
-│   └── startup.sh         # GPU diagnostics script
+│   └── debug.sh           # GPU diagnostics script
 ├── mqtt/
 │   └── (coming soon)      # MQTT variant for Home Assistant
 ├── build.sh               # Build script for all variants
@@ -69,14 +71,14 @@ docker run -d \
 ### Building Locally
 
 ```bash
-# Auf Unraid - alle Images bauen
+# On Unraid - build all images
 cd /mnt/cache/system/docker/Build1
 ./build.sh all
 
-# Nur bestimmte Variante bauen
-./build.sh base    # Muss zuerst gebaut werden
-./build.sh main    # Produktion
-./build.sh debug   # Mit Diagnostik
+# Build specific variant
+./build.sh base    # Must be built first
+./build.sh main    # Production
+./build.sh debug   # With diagnostics
 ```
 
 ## Installation in Unraid
@@ -101,9 +103,19 @@ wget -O /boot/config/plugins/dockerMan/templates-user/my-Jellyfin-Nvidia-CUDA12.
 - **Media Path**: `/mnt/user/media`
 
 **GPU Settings:**
-- Container uses `--gpus=all` by default
-- `NVIDIA_VISIBLE_DEVICES=all`
-- `NVIDIA_DRIVER_CAPABILITIES=all,compute,video,utility`
+
+> ⚠️ **Important:** The following settings are already pre-configured in the template. Do **NOT** add `runtime: nvidia` or other GPU runtime settings - this will cause conflicts with Unraid's NVIDIA Driver plugin!
+
+| Setting | Value | Status |
+|---------|-------|--------|
+| `--gpus` | `all` | ✅ Pre-configured |
+| `NVIDIA_VISIBLE_DEVICES` | `all` | ✅ Pre-configured |
+| `NVIDIA_DRIVER_CAPABILITIES` | `all,compute,video,utility` | ✅ Pre-configured |
+
+**Do NOT set:**
+- ❌ `runtime: nvidia`
+- ❌ `NVIDIA_RUNTIME`
+- ❌ Any other NVIDIA runtime parameters
 
 ## Debug Variant Output
 
@@ -122,10 +134,6 @@ Quadro K2200, 550.120, 45, 0 %, 4096 MiB, 100 MiB
 Version: ffmpeg version 6.1.1
 NVENC encoders: 8
 CUVID decoders: 12
-Hardware acceleration methods:
-cuda
-vdpau
-vaapi
 
 [DEVICES]
 NVIDIA devices found: 4
