@@ -29,7 +29,7 @@ if command -v ffmpeg >/dev/null 2>&1; then
   echo "NVENC encoders: $(ffmpeg -encoders 2>&1 | grep -c _nvenc)"
   echo "CUVID decoders: $(ffmpeg -decoders 2>&1 | grep -c _cuvid)"
   echo "Hardware acceleration methods:"
-  ffmpeg -hwaccels 2>&1 | tail -n +2
+  ffmpeg -hwaccels 2>/dev/null | tail -n +2
 else
   echo "ERROR: ffmpeg not found!"
 fi
