@@ -29,7 +29,7 @@ A Docker template for Jellyfin Media Server with full NVIDIA GPU support (CUDA 1
 
 ## Installation in Unraid (One-Click Method)
 
-1.  wget -O /boot/config/plugins/dockerMan/templates-user/Jellyfin-Nvidia-CUDA12.xml https://github.com/rbxxswap/Jellyfin-Nvidia-CUDA12/raw/main/Unraid/template.xml
+1.  wget -O /boot/config/plugins/dockerMan/templates-user/my-Jellyfin-Nvidia-CUDA12.xml https://github.com/rbxxswap/Jellyfin-Nvidia-CUDA12/raw/main/Unraid/template.xml
 3.  Paste the following **RAW GitHub URL** into the input field that appears:
     `https://github.com/rbxxswap/Jellyfin-Nvidia-CUDA12/raw/main/unraid/template.xml`
 4.  Click **"OK"** or **"Install"**.
