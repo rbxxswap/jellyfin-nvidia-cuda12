@@ -117,30 +117,68 @@ wget -O /boot/config/plugins/dockerMan/templates-user/my-Jellyfin-Nvidia-CUDA12.
 - ❌ `NVIDIA_RUNTIME`
 - ❌ Andere NVIDIA Runtime-Parameter
 
-## Debug-Variante Ausgabe
+## Debug-Variante
 
-Bei Verwendung von `:debug` erscheint diese Ausgabe beim Container-Start:
+Die `:debug`-Variante zeigt GPU-Diagnose beim Container-Start und speichert die Ausgabe in eine Datei für späteren Zugriff.
+
+### Debug-Ausgabe anzeigen
+
+**Methode 1: Unraid Console** (empfohlen)
+1. Im Unraid Docker-Tab auf das Container-Icon klicken
+2. **"Console"** auswählen
+3. Ausführen: `cat /config/debug-output.txt`
+
+**Methode 2: Terminal/SSH**
+```bash
+docker exec jellyfin-debug cat /config/debug-output.txt
+```
+
+**Methode 3: Datei-Browser**
+- Zum Config-Pfad navigieren (z.B. `/mnt/user/appdata/jellyfin-nvidia/`)
+- `debug-output.txt` öffnen
+
+### Beispiel-Ausgabe
 
 ```
 ================================================
 JELLYFIN NVIDIA GPU DIAGNOSTICS
 Container Start: Wed Dec 18 07:00:00 UTC 2025
 ================================================
+[SYSTEM]
+Image: "Ubuntu 24.04.2 LTS"
+
 [GPU]
 name, driver_version, temperature.gpu, utilization.gpu, memory.total, memory.used
-Quadro K2200, 550.120, 45, 0 %, 4096 MiB, 100 MiB
+Quadro P2000, 575.64.05, 33, 0 %, 5120 MiB, 0 MiB
 
 [FFMPEG]
-Version: ffmpeg version 6.1.1
-NVENC encoders: 8
-CUVID decoders: 12
+Version: ffmpeg version 6.1.1-3ubuntu5
+NVENC encoders: 3
+CUVID decoders: 10
+Hardware acceleration methods:
+vdpau
+cuda
+vaapi
+qsv
+drm
+opencl
+vulkan
 
 [DEVICES]
 NVIDIA devices found: 4
+crw-rw-rw- 1 root root 195,   0 Dec 18 13:46 /dev/nvidia0
+crw-rw-rw- 1 root root 195, 255 Dec 18 13:46 /dev/nvidiactl
+...
+
+================================================
+Debug output saved to: /config/debug-output.txt
+View anytime with: cat /config/debug-output.txt
 ================================================
 Starting Jellyfin...
 ================================================
 ```
+
+> **Hinweis:** Die Debug-Ausgabe wird bei jedem Container-Start neu generiert. Der Unraid Log-Viewer zeigt nur die neuesten Zeilen, daher die oben genannten Methoden für die vollständige Diagnose verwenden.
 
 ## Lizenz
 

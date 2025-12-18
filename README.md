@@ -117,30 +117,68 @@ wget -O /boot/config/plugins/dockerMan/templates-user/my-Jellyfin-Nvidia-CUDA12.
 - ❌ `NVIDIA_RUNTIME`
 - ❌ Any other NVIDIA runtime parameters
 
-## Debug Variant Output
+## Debug Variant
 
-When using `:debug`, you'll see this output at container start:
+The `:debug` variant shows GPU diagnostics at container start and saves the output to a file for later access.
+
+### Viewing Debug Output
+
+**Method 1: Unraid Console** (recommended)
+1. In Unraid Docker tab, click the container icon
+2. Select **"Console"**
+3. Run: `cat /config/debug-output.txt`
+
+**Method 2: Terminal/SSH**
+```bash
+docker exec jellyfin-debug cat /config/debug-output.txt
+```
+
+**Method 3: File Browser**
+- Navigate to your config path (e.g., `/mnt/user/appdata/jellyfin-nvidia/`)
+- Open `debug-output.txt`
+
+### Example Output
 
 ```
 ================================================
 JELLYFIN NVIDIA GPU DIAGNOSTICS
 Container Start: Wed Dec 18 07:00:00 UTC 2025
 ================================================
+[SYSTEM]
+Image: "Ubuntu 24.04.2 LTS"
+
 [GPU]
 name, driver_version, temperature.gpu, utilization.gpu, memory.total, memory.used
-Quadro K2200, 550.120, 45, 0 %, 4096 MiB, 100 MiB
+Quadro P2000, 575.64.05, 33, 0 %, 5120 MiB, 0 MiB
 
 [FFMPEG]
-Version: ffmpeg version 6.1.1
-NVENC encoders: 8
-CUVID decoders: 12
+Version: ffmpeg version 6.1.1-3ubuntu5
+NVENC encoders: 3
+CUVID decoders: 10
+Hardware acceleration methods:
+vdpau
+cuda
+vaapi
+qsv
+drm
+opencl
+vulkan
 
 [DEVICES]
 NVIDIA devices found: 4
+crw-rw-rw- 1 root root 195,   0 Dec 18 13:46 /dev/nvidia0
+crw-rw-rw- 1 root root 195, 255 Dec 18 13:46 /dev/nvidiactl
+...
+
+================================================
+Debug output saved to: /config/debug-output.txt
+View anytime with: cat /config/debug-output.txt
 ================================================
 Starting Jellyfin...
 ================================================
 ```
+
+> **Note:** The debug output is regenerated each time the container starts. The Unraid log viewer only shows the most recent lines, so use the methods above to see the full diagnostics.
 
 ## License
 
