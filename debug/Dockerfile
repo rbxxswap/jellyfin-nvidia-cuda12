@@ -14,8 +14,8 @@ LABEL variant="debug"
 LABEL description="Jellyfin CUDA 12.9.1 - Debug with GPU diagnostics"
 
 # Diagnostik-Script kopieren
-COPY startup.sh /startup.sh
-RUN chmod +x /startup.sh
+COPY debug.sh /debug.sh
+RUN chmod +x /debug.sh
 
 # Start über Diagnostik-Script (führt am Ende exec jellyfin aus)
-ENTRYPOINT ["/startup.sh"]
+ENTRYPOINT ["/debug.sh"]
