@@ -123,9 +123,9 @@ Die `:debug`-Variante zeigt GPU-Diagnose beim Container-Start und speichert die 
 
 ### Debug-Ausgabe anzeigen
 
-**Methode 1: Unraid Console** (empfohlen)
+**Methode 1: Unraid Container Console** (empfohlen)
 1. Im Unraid Docker-Tab auf das Container-Icon klicken
-2. **"Console"** auswählen
+2. **">_Console"** auswählen (öffnet eine Shell *im Container*)
 3. Ausführen: `cat /config/debug-output.txt`
 
 **Methode 2: Terminal/SSH**
