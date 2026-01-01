@@ -42,6 +42,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN mkdir -p /usr/lib/jellyfin/bin/ \
     && ln -sf /usr/share/jellyfin/web /usr/lib/jellyfin/bin/jellyfin-web
 
+# Jellyfin Pfade konfigurieren (damit /config Volume genutzt wird)
+ENV JELLYFIN_DATA_DIR=/config/data
+ENV JELLYFIN_CONFIG_DIR=/config
+ENV JELLYFIN_CACHE_DIR=/config/cache
+ENV JELLYFIN_LOG_DIR=/config/log
+
 # Port freigeben
 EXPOSE 8096
 

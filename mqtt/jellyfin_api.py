@@ -31,7 +31,8 @@ class JellyfinAPI:
             response = requests.request(
                 method, 
                 url, 
-                headers=self.headers, 
+                headers=self.headers,
+                params={'api_key': self.api_key},
                 timeout=10,
                 **kwargs
             )

@@ -1,0 +1,493 @@
+=== JELLYFIN API - VOLLSTÄNDIGE ENDPOINT-LISTE ===
+Version: 10.11.5
+Total: 315 Endpoints in 54 Kategorien
+
+=== ActivityLog (1) ===
+GET /System/ActivityLog/Entries
+
+=== ApiKey (3) ===
+DELETE /Auth/Keys/{key}
+GET /Auth/Keys
+POST /Auth/Keys
+
+=== Artists (3) ===
+GET /Artists
+GET /Artists/AlbumArtists
+GET /Artists/{name}
+
+=== Audio (2) ===
+GET /Audio/{itemId}/stream
+GET /Audio/{itemId}/stream.{container}
+
+=== Backup (4) ===
+GET /Backup
+GET /Backup/Manifest
+POST /Backup/Create
+POST /Backup/Restore
+
+=== Branding (3) ===
+GET /Branding/Configuration
+GET /Branding/Css
+GET /Branding/Css.css
+
+=== Channels (5) ===
+GET /Channels
+GET /Channels/Features
+GET /Channels/Items/Latest
+GET /Channels/{channelId}/Features
+GET /Channels/{channelId}/Items
+
+=== ClientLog (1) ===
+POST /ClientLog/Document
+
+=== Collection (3) ===
+DELETE /Collections/{collectionId}/Items
+POST /Collections
+POST /Collections/{collectionId}/Items
+
+=== Configuration (6) ===
+GET /System/Configuration
+GET /System/Configuration/MetadataOptions/Default
+GET /System/Configuration/{key}
+POST /System/Configuration
+POST /System/Configuration/Branding
+POST /System/Configuration/{key}
+
+=== Dashboard (2) ===
+GET /web/ConfigurationPage
+GET /web/ConfigurationPages
+
+=== Devices (5) ===
+DELETE /Devices
+GET /Devices
+GET /Devices/Info
+GET /Devices/Options
+POST /Devices/Options
+
+=== DisplayPreferences (2) ===
+GET /DisplayPreferences/{displayPreferencesId}
+POST /DisplayPreferences/{displayPreferencesId}
+
+=== DynamicHls (7) ===
+GET /Audio/{itemId}/hls1/{playlistId}/{segmentId}.{container}
+GET /Audio/{itemId}/main.m3u8
+GET /Audio/{itemId}/master.m3u8
+GET /Videos/{itemId}/hls1/{playlistId}/{segmentId}.{container}
+GET /Videos/{itemId}/live.m3u8
+GET /Videos/{itemId}/main.m3u8
+GET /Videos/{itemId}/master.m3u8
+
+=== Environment (6) ===
+GET /Environment/DefaultDirectoryBrowser
+GET /Environment/DirectoryContents
+GET /Environment/Drives
+GET /Environment/NetworkShares
+GET /Environment/ParentPath
+POST /Environment/ValidatePath
+
+=== Filter (2) ===
+GET /Items/Filters
+GET /Items/Filters2
+
+=== Genres (2) ===
+GET /Genres
+GET /Genres/{genreName}
+
+=== HlsSegment (5) ===
+DELETE /Videos/ActiveEncodings
+GET /Audio/{itemId}/hls/{segmentId}/stream.aac
+GET /Audio/{itemId}/hls/{segmentId}/stream.mp3
+GET /Videos/{itemId}/hls/{playlistId}/stream.m3u8
+GET /Videos/{itemId}/hls/{playlistId}/{segmentId}.{segmentContainer}
+
+=== Image (24) ===
+DELETE /Branding/Splashscreen
+DELETE /Items/{itemId}/Images/{imageType}
+DELETE /Items/{itemId}/Images/{imageType}/{imageIndex}
+DELETE /UserImage
+GET /Artists/{name}/Images/{imageType}/{imageIndex}
+GET /Branding/Splashscreen
+GET /Genres/{name}/Images/{imageType}
+GET /Genres/{name}/Images/{imageType}/{imageIndex}
+GET /Items/{itemId}/Images
+GET /Items/{itemId}/Images/{imageType}
+GET /Items/{itemId}/Images/{imageType}/{imageIndex}
+GET /Items/{itemId}/Images/{imageType}/{imageIndex}/{tag}/{format}/{maxWidth}/{maxHeight}/{percentPlayed}/{unplayedCount}
+GET /MusicGenres/{name}/Images/{imageType}
+GET /MusicGenres/{name}/Images/{imageType}/{imageIndex}
+GET /Persons/{name}/Images/{imageType}
+GET /Persons/{name}/Images/{imageType}/{imageIndex}
+GET /Studios/{name}/Images/{imageType}
+GET /Studios/{name}/Images/{imageType}/{imageIndex}
+GET /UserImage
+POST /Branding/Splashscreen
+POST /Items/{itemId}/Images/{imageType}
+POST /Items/{itemId}/Images/{imageType}/{imageIndex}
+POST /Items/{itemId}/Images/{imageType}/{imageIndex}/Index
+POST /UserImage
+
+=== InstantMix (8) ===
+GET /Albums/{itemId}/InstantMix
+GET /Artists/InstantMix
+GET /Artists/{itemId}/InstantMix
+GET /Items/{itemId}/InstantMix
+GET /MusicGenres/InstantMix
+GET /MusicGenres/{name}/InstantMix
+GET /Playlists/{itemId}/InstantMix
+GET /Songs/{itemId}/InstantMix
+
+=== ItemLookup (11) ===
+GET /Items/{itemId}/ExternalIdInfos
+POST /Items/RemoteSearch/Apply/{itemId}
+POST /Items/RemoteSearch/Book
+POST /Items/RemoteSearch/BoxSet
+POST /Items/RemoteSearch/Movie
+POST /Items/RemoteSearch/MusicAlbum
+POST /Items/RemoteSearch/MusicArtist
+POST /Items/RemoteSearch/MusicVideo
+POST /Items/RemoteSearch/Person
+POST /Items/RemoteSearch/Series
+POST /Items/RemoteSearch/Trailer
+
+=== ItemRefresh (1) ===
+POST /Items/{itemId}/Refresh
+
+=== ItemUpdate (3) ===
+GET /Items/{itemId}/MetadataEditor
+POST /Items/{itemId}
+POST /Items/{itemId}/ContentType
+
+=== Items (4) ===
+GET /Items
+GET /UserItems/Resume
+GET /UserItems/{itemId}/UserData
+POST /UserItems/{itemId}/UserData
+
+=== Library (25) ===
+DELETE /Items
+DELETE /Items/{itemId}
+GET /Albums/{itemId}/Similar
+GET /Artists/{itemId}/Similar
+GET /Items/Counts
+GET /Items/{itemId}/Ancestors
+GET /Items/{itemId}/CriticReviews
+GET /Items/{itemId}/Download
+GET /Items/{itemId}/File
+GET /Items/{itemId}/Similar
+GET /Items/{itemId}/ThemeMedia
+GET /Items/{itemId}/ThemeSongs
+GET /Items/{itemId}/ThemeVideos
+GET /Libraries/AvailableOptions
+GET /Library/MediaFolders
+GET /Library/PhysicalPaths
+GET /Movies/{itemId}/Similar
+GET /Shows/{itemId}/Similar
+GET /Trailers/{itemId}/Similar
+POST /Library/Media/Updated
+POST /Library/Movies/Added
+POST /Library/Movies/Updated
+POST /Library/Refresh
+POST /Library/Series/Added
+POST /Library/Series/Updated
+
+=== LibraryStructure (8) ===
+DELETE /Library/VirtualFolders
+DELETE /Library/VirtualFolders/Paths
+GET /Library/VirtualFolders
+POST /Library/VirtualFolders
+POST /Library/VirtualFolders/LibraryOptions
+POST /Library/VirtualFolders/Name
+POST /Library/VirtualFolders/Paths
+POST /Library/VirtualFolders/Paths/Update
+
+=== LiveTv (41) ===
+DELETE /LiveTv/ListingProviders
+DELETE /LiveTv/Recordings/{recordingId}
+DELETE /LiveTv/SeriesTimers/{timerId}
+DELETE /LiveTv/Timers/{timerId}
+DELETE /LiveTv/TunerHosts
+GET /LiveTv/ChannelMappingOptions
+GET /LiveTv/Channels
+GET /LiveTv/Channels/{channelId}
+GET /LiveTv/GuideInfo
+GET /LiveTv/Info
+GET /LiveTv/ListingProviders/Default
+GET /LiveTv/ListingProviders/Lineups
+GET /LiveTv/ListingProviders/SchedulesDirect/Countries
+GET /LiveTv/LiveRecordings/{recordingId}/stream
+GET /LiveTv/LiveStreamFiles/{streamId}/stream.{container}
+GET /LiveTv/Programs
+GET /LiveTv/Programs/Recommended
+GET /LiveTv/Programs/{programId}
+GET /LiveTv/Recordings
+GET /LiveTv/Recordings/Folders
+GET /LiveTv/Recordings/Groups
+GET /LiveTv/Recordings/Groups/{groupId}
+GET /LiveTv/Recordings/Series
+GET /LiveTv/Recordings/{recordingId}
+GET /LiveTv/SeriesTimers
+GET /LiveTv/SeriesTimers/{timerId}
+GET /LiveTv/Timers
+GET /LiveTv/Timers/Defaults
+GET /LiveTv/Timers/{timerId}
+GET /LiveTv/TunerHosts/Types
+GET /LiveTv/Tuners/Discover
+GET /LiveTv/Tuners/Discvover
+POST /LiveTv/ChannelMappings
+POST /LiveTv/ListingProviders
+POST /LiveTv/Programs
+POST /LiveTv/SeriesTimers
+POST /LiveTv/SeriesTimers/{timerId}
+POST /LiveTv/Timers
+POST /LiveTv/Timers/{timerId}
+POST /LiveTv/TunerHosts
+POST /LiveTv/Tuners/{tunerId}/Reset
+
+=== Localization (4) ===
+GET /Localization/Countries
+GET /Localization/Cultures
+GET /Localization/Options
+GET /Localization/ParentalRatings
+
+=== Lyrics (6) ===
+DELETE /Audio/{itemId}/Lyrics
+GET /Audio/{itemId}/Lyrics
+GET /Audio/{itemId}/RemoteSearch/Lyrics
+GET /Providers/Lyrics/{lyricId}
+POST /Audio/{itemId}/Lyrics
+POST /Audio/{itemId}/RemoteSearch/Lyrics/{lyricId}
+
+=== MediaInfo (5) ===
+GET /Items/{itemId}/PlaybackInfo
+GET /Playback/BitrateTest
+POST /Items/{itemId}/PlaybackInfo
+POST /LiveStreams/Close
+POST /LiveStreams/Open
+
+=== MediaSegments (1) ===
+GET /MediaSegments/{itemId}
+
+=== Movies (1) ===
+GET /Movies/Recommendations
+
+=== MusicGenres (2) ===
+GET /MusicGenres
+GET /MusicGenres/{genreName}
+
+=== Package (6) ===
+DELETE /Packages/Installing/{packageId}
+GET /Packages
+GET /Packages/{name}
+GET /Repositories
+POST /Packages/Installed/{name}
+POST /Repositories
+
+=== Persons (2) ===
+GET /Persons
+GET /Persons/{name}
+
+=== Playlists (11) ===
+DELETE /Playlists/{playlistId}/Items
+DELETE /Playlists/{playlistId}/Users/{userId}
+GET /Playlists/{playlistId}
+GET /Playlists/{playlistId}/Items
+GET /Playlists/{playlistId}/Users
+GET /Playlists/{playlistId}/Users/{userId}
+POST /Playlists
+POST /Playlists/{playlistId}
+POST /Playlists/{playlistId}/Items
+POST /Playlists/{playlistId}/Items/{itemId}/Move/{newIndex}
+POST /Playlists/{playlistId}/Users/{userId}
+
+=== Playstate (9) ===
+DELETE /PlayingItems/{itemId}
+DELETE /UserPlayedItems/{itemId}
+POST /PlayingItems/{itemId}
+POST /PlayingItems/{itemId}/Progress
+POST /Sessions/Playing
+POST /Sessions/Playing/Ping
+POST /Sessions/Playing/Progress
+POST /Sessions/Playing/Stopped
+POST /UserPlayedItems/{itemId}
+
+=== Plugins (9) ===
+DELETE /Plugins/{pluginId}
+DELETE /Plugins/{pluginId}/{version}
+GET /Plugins
+GET /Plugins/{pluginId}/Configuration
+GET /Plugins/{pluginId}/{version}/Image
+POST /Plugins/{pluginId}/Configuration
+POST /Plugins/{pluginId}/Manifest
+POST /Plugins/{pluginId}/{version}/Disable
+POST /Plugins/{pluginId}/{version}/Enable
+
+=== QuickConnect (4) ===
+GET /QuickConnect/Connect
+GET /QuickConnect/Enabled
+POST /QuickConnect/Authorize
+POST /QuickConnect/Initiate
+
+=== RemoteImage (3) ===
+GET /Items/{itemId}/RemoteImages
+GET /Items/{itemId}/RemoteImages/Providers
+POST /Items/{itemId}/RemoteImages/Download
+
+=== ScheduledTasks (5) ===
+DELETE /ScheduledTasks/Running/{taskId}
+GET /ScheduledTasks
+GET /ScheduledTasks/{taskId}
+POST /ScheduledTasks/Running/{taskId}
+POST /ScheduledTasks/{taskId}/Triggers
+
+=== Search (1) ===
+GET /Search/Hints
+
+=== Session (16) ===
+DELETE /Sessions/{sessionId}/User/{userId}
+GET /Auth/PasswordResetProviders
+GET /Auth/Providers
+GET /Sessions
+POST /Sessions/Capabilities
+POST /Sessions/Capabilities/Full
+POST /Sessions/Logout
+POST /Sessions/Viewing
+POST /Sessions/{sessionId}/Command
+POST /Sessions/{sessionId}/Command/{command}
+POST /Sessions/{sessionId}/Message
+POST /Sessions/{sessionId}/Playing
+POST /Sessions/{sessionId}/Playing/{command}
+POST /Sessions/{sessionId}/System/{command}
+POST /Sessions/{sessionId}/User/{userId}
+POST /Sessions/{sessionId}/Viewing
+
+=== Startup (7) ===
+GET /Startup/Configuration
+GET /Startup/FirstUser
+GET /Startup/User
+POST /Startup/Complete
+POST /Startup/Configuration
+POST /Startup/RemoteAccess
+POST /Startup/User
+
+=== Studios (2) ===
+GET /Studios
+GET /Studios/{name}
+
+=== Subtitle (10) ===
+DELETE /Videos/{itemId}/Subtitles/{index}
+GET /FallbackFont/Fonts
+GET /FallbackFont/Fonts/{name}
+GET /Items/{itemId}/RemoteSearch/Subtitles/{language}
+GET /Providers/Subtitles/Subtitles/{subtitleId}
+GET /Videos/{itemId}/{mediaSourceId}/Subtitles/{index}/subtitles.m3u8
+GET /Videos/{routeItemId}/{routeMediaSourceId}/Subtitles/{routeIndex}/Stream.{routeFormat}
+GET /Videos/{routeItemId}/{routeMediaSourceId}/Subtitles/{routeIndex}/{routeStartPositionTicks}/Stream.{routeFormat}
+POST /Items/{itemId}/RemoteSearch/Subtitles/{subtitleId}
+POST /Videos/{itemId}/Subtitles
+
+=== Suggestions (1) ===
+GET /Items/Suggestions
+
+=== SyncPlay (22) ===
+GET /SyncPlay/List
+GET /SyncPlay/{id}
+POST /SyncPlay/Buffering
+POST /SyncPlay/Join
+POST /SyncPlay/Leave
+POST /SyncPlay/MovePlaylistItem
+POST /SyncPlay/New
+POST /SyncPlay/NextItem
+POST /SyncPlay/Pause
+POST /SyncPlay/Ping
+POST /SyncPlay/PreviousItem
+POST /SyncPlay/Queue
+POST /SyncPlay/Ready
+POST /SyncPlay/RemoveFromPlaylist
+POST /SyncPlay/Seek
+POST /SyncPlay/SetIgnoreWait
+POST /SyncPlay/SetNewQueue
+POST /SyncPlay/SetPlaylistItem
+POST /SyncPlay/SetRepeatMode
+POST /SyncPlay/SetShuffleMode
+POST /SyncPlay/Stop
+POST /SyncPlay/Unpause
+
+=== System (10) ===
+GET /System/Endpoint
+GET /System/Info
+GET /System/Info/Public
+GET /System/Info/Storage
+GET /System/Logs
+GET /System/Logs/Log
+GET /System/Ping
+POST /System/Ping
+POST /System/Restart
+POST /System/Shutdown
+
+=== TimeSync (1) ===
+GET /GetUtcTime
+
+=== Tmdb (1) ===
+GET /Tmdb/ClientConfiguration
+
+=== Trailers (1) ===
+GET /Trailers
+
+=== Trickplay (2) ===
+GET /Videos/{itemId}/Trickplay/{width}/tiles.m3u8
+GET /Videos/{itemId}/Trickplay/{width}/{index}.jpg
+
+=== TvShows (4) ===
+GET /Shows/NextUp
+GET /Shows/Upcoming
+GET /Shows/{seriesId}/Episodes
+GET /Shows/{seriesId}/Seasons
+
+=== UniversalAudio (1) ===
+GET /Audio/{itemId}/universal
+
+=== User (14) ===
+DELETE /Users/{userId}
+GET /Users
+GET /Users/Me
+GET /Users/Public
+GET /Users/{userId}
+POST /Users
+POST /Users/AuthenticateByName
+POST /Users/AuthenticateWithQuickConnect
+POST /Users/Configuration
+POST /Users/ForgotPassword
+POST /Users/ForgotPassword/Pin
+POST /Users/New
+POST /Users/Password
+POST /Users/{userId}/Policy
+
+=== UserLibrary (10) ===
+DELETE /UserFavoriteItems/{itemId}
+DELETE /UserItems/{itemId}/Rating
+GET /Items/Latest
+GET /Items/Root
+GET /Items/{itemId}
+GET /Items/{itemId}/Intros
+GET /Items/{itemId}/LocalTrailers
+GET /Items/{itemId}/SpecialFeatures
+POST /UserFavoriteItems/{itemId}
+POST /UserItems/{itemId}/Rating
+
+=== UserViews (2) ===
+GET /UserViews
+GET /UserViews/GroupingOptions
+
+=== VideoAttachments (1) ===
+GET /Videos/{videoId}/{mediaSourceId}/Attachments/{index}
+
+=== Videos (5) ===
+DELETE /Videos/{itemId}/AlternateSources
+GET /Videos/{itemId}/AdditionalParts
+GET /Videos/{itemId}/stream
+GET /Videos/{itemId}/stream.{container}
+POST /Videos/MergeVersions
+
+=== Years (2) ===
+GET /Years
+GET /Years/{year}

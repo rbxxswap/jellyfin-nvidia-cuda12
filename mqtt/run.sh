@@ -36,4 +36,4 @@ echo "[Startup] Starting Jellyfin server..."
 echo "=============================================="
 
 # Execute Jellyfin as main process
-exec /jellyfin/jellyfin
+exec /usr/bin/jellyfin
