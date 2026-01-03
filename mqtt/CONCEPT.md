@@ -123,7 +123,7 @@ jellyfin/                           # Base Topic
   "model": "Jellyfin 10.11.5",
   "manufacturer": "Jellyfin",
   "sw_version": "MQTT Bridge 1.0",
-  "configuration_url": "http://192.168.1.57:8096"
+  "configuration_url": "http://<UNRAID_IP>:8096"
 }
 ```
 

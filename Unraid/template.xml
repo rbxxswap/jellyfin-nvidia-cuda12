@@ -10,7 +10,7 @@
   <Overview>Jellyfin Media Server mit voller NVIDIA GPU-Unterstützung (CUDA 12.9.1). Template-Pfade sind leer - BEI DER ERSTINSTALLATION UNBEDINGT EIGENE PFADE EINTRAGEN.</Overview>
   <Category>MediaServer:Video</Category>
   <WebUI>http://[IP]:[PORT:8096]/</WebUI>
-  <ExtraParams>--gpus=all</ExtraParams>
+  <ExtraParams>--gpus=all --restart=unless-stopped</ExtraParams>
   <Icon>https://raw.githubusercontent.com/jellyfin/jellyfin/master/deployment/unraid/docker-templates/icon-jellyfin.png</Icon>
 
   <!-- PFADE: Default ist leer, muss bei Erstinstallation gesetzt werden -->

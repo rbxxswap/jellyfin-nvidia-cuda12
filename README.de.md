@@ -180,6 +180,38 @@ Starting Jellyfin...
 
 > **Hinweis:** Die Debug-Ausgabe wird bei jedem Container-Start neu generiert. Der Unraid Log-Viewer zeigt nur die neuesten Zeilen, daher die oben genannten Methoden für die vollständige Diagnose verwenden.
 
+## Container aktualisieren (Unraid)
+
+### Einstellungen ändern
+
+Container-Einstellungen können jederzeit über die Unraid GUI geändert werden:
+1. Docker-Tab → Container-Icon anklicken → Edit
+2. Einstellungen nach Bedarf ändern
+3. Apply → Container startet mit neuen Einstellungen neu
+
+### Auf neue Image-Version aktualisieren
+
+Um eine neuere Image-Version zu ziehen (z.B. nach Docker Hub Update):
+
+1. Docker-Tab → Container-Icon anklicken → **Force Update**
+2. Unraid zieht das neueste Image und erstellt den Container neu
+3. ✅ Deine Daten in `/config` bleiben erhalten
+
+### Nach lokalem Rebuild
+
+Wenn du das Image lokal neu gebaut hast (z.B. nach Dockerfile-Änderungen):
+
+```bash
+# Auf Unraid
+cd /mnt/cache/system/docker/Build1
+./build.sh base    # Zuerst Base rebuilden
+./build.sh main    # Dann main/latest rebuilden
+```
+
+Dann: Docker-Tab → Container-Icon anklicken → **Force Update**
+
+Der Container wird mit deinem neu gebauten lokalen Image neu erstellt. Deine `/config`-Daten bleiben erhalten.
+
 ## Lizenz
 
 MIT-Lizenz - Siehe LICENSE-Datei für Details.

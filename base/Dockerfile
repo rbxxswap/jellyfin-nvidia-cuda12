@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     jellyfin-server \
     jellyfin-web \
-    ffmpeg \
+    jellyfin-ffmpeg6 \
     libass9 \
     libfreetype6 \
     libva2 \
