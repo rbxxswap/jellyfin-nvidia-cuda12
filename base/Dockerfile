@@ -42,6 +42,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN mkdir -p /usr/lib/jellyfin/bin/ \
     && ln -sf /usr/share/jellyfin/web /usr/lib/jellyfin/bin/jellyfin-web
 
+# 4. FFmpeg Symlinks erstellen (jellyfin-ffmpeg6 installiert unter /usr/lib/jellyfin-ffmpeg/)
+RUN ln -sf /usr/lib/jellyfin-ffmpeg/ffmpeg /usr/bin/ffmpeg \
+    && ln -sf /usr/lib/jellyfin-ffmpeg/ffprobe /usr/bin/ffprobe
+
 # Jellyfin Pfade konfigurieren (damit /config Volume genutzt wird)
 ENV JELLYFIN_DATA_DIR=/config/data
 ENV JELLYFIN_CONFIG_DIR=/config
