@@ -23,11 +23,13 @@ RUN mkdir -p /usr/local/bin/mqtt
 # Copy MQTT Bridge scripts
 COPY requirements.txt /usr/local/bin/mqtt/
 COPY config.py /usr/local/bin/mqtt/
-COPY discovery.py /usr/local/bin/mqtt/
-COPY jellyfin_api.py /usr/local/bin/mqtt/
 COPY gpu_monitor.py /usr/local/bin/mqtt/
 COPY container_stats.py /usr/local/bin/mqtt/
 COPY mqtt_bridge.py /usr/local/bin/mqtt/
+
+# Copy modular API and Discovery packages
+COPY api/ /usr/local/bin/mqtt/api/
+COPY discovery/ /usr/local/bin/mqtt/discovery/
 
 # Install Python dependencies
 RUN pip3 install --no-cache-dir --break-system-packages -r /usr/local/bin/mqtt/requirements.txt
