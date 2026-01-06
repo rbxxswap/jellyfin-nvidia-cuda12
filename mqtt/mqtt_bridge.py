@@ -67,8 +67,8 @@ class MQTTBridge:
     def _on_connect(self, client, userdata, flags, rc):
         """MQTT connection callback"""
         if rc == 0:
-            logger.info("Connected to MQTT broker at %s:%d", self.config.mqtt_host, self.config.mqtt_port)
-            client.publish(f"{self.config.mqtt_topic}/status", "online", qos=1, retain=True)
+            # Don't log here - run() already logs connection
+            # Don't publish status here - run() controls status (starting/online)
             
             # Subscribe to command topics
             base = self.config.mqtt_topic
@@ -79,7 +79,7 @@ class MQTTBridge:
             client.subscribe(f"{base}/sessions/+/+/set")
             logger.info("Subscribed to command topics")
             
-            # Publish discovery
+            # Publish discovery only if jellyfin is ready (discovery exists)
             if self.discovery:
                 self.discovery.register_all_static()
                 self.discovery.register_group_switches(self.jellyfin.GROUPS)
@@ -718,44 +718,64 @@ class MQTTBridge:
         
         self.config.log_config()
         
-        # Initialize components
-        self.jellyfin = JellyfinAPI(self.config.jellyfin_host, self.config.jellyfin_api_key)
-        self.gpu = get_gpu_monitor()
-        self.container = get_container_stats()
+        # Setup signals early
+        self.running = True
+        signal.signal(signal.SIGTERM, self._signal_handler)
+        signal.signal(signal.SIGINT, self._signal_handler)
         
-        # Wait for Jellyfin
-        logger.info("Waiting for Jellyfin API...")
-        for i in range(30):
-            if self.jellyfin.system.ping():
-                logger.info("Jellyfin API responding")
-                break
-            time.sleep(2)
-        else:
-            logger.error("Jellyfin API not responding after 60s")
-            return 1
-        
-        # Get server info
-        self.server_info = self.jellyfin.system.get_system_info()
-        if self.server_info:
-            logger.info("Connected to Jellyfin %s", self.server_info.get('Version'))
-
-        # Setup MQTT
+        # 1. MQTT FIRST - connect before anything else
         self.setup_mqtt()
-        self.discovery = DiscoveryManager(self.mqtt_client, self.server_info)
-        
-        # Connect
         try:
             self.mqtt_client.connect(self.config.mqtt_host, self.config.mqtt_port, keepalive=60)
+            self.mqtt_client.loop_start()
+            logger.info("Connected to MQTT broker at %s:%d", self.config.mqtt_host, self.config.mqtt_port)
         except Exception as e:
             logger.error("MQTT connection failed: %s", str(e))
             return 1
         
-        self.mqtt_client.loop_start()
+        # 2. Publish "starting" status immediately
+        self.publish("status", "starting", retain=True)
+        logger.info("Published status: starting")
         
-        # Setup signals
-        self.running = True
-        signal.signal(signal.SIGTERM, self._signal_handler)
-        signal.signal(signal.SIGINT, self._signal_handler)
+        # 3. Initialize components
+        self.jellyfin = JellyfinAPI(self.config.jellyfin_host, self.config.jellyfin_api_key)
+        self.gpu = get_gpu_monitor()
+        self.container = get_container_stats()
+        
+        # 4. Wait for Jellyfin API (don't exit on timeout, keep trying)
+        logger.info("Waiting for Jellyfin API...")
+        jellyfin_ready = False
+        wait_count = 0
+        while self.running and not jellyfin_ready:
+            if self.jellyfin.system.ping():
+                jellyfin_ready = True
+                logger.info("Jellyfin API responding")
+            else:
+                wait_count += 1
+                if wait_count % 15 == 0:  # Log every 30 seconds
+                    logger.info("Still waiting for Jellyfin API... (%ds)", wait_count * 2)
+                time.sleep(2)
+        
+        if not self.running:
+            logger.info("Shutdown requested during startup")
+            self.publish("status", "offline", retain=True)
+            self.mqtt_client.loop_stop()
+            self.mqtt_client.disconnect()
+            return 0
+        
+        # 5. Get server info and publish "online"
+        self.server_info = self.jellyfin.system.get_system_info()
+        if self.server_info:
+            logger.info("Connected to Jellyfin %s", self.server_info.get('Version'))
+        
+        self.publish("status", "online", retain=True)
+        logger.info("Published status: online")
+        
+        # 6. Now setup discovery with server info and register entities
+        self.discovery = DiscoveryManager(self.mqtt_client, self.server_info)
+        self.discovery.register_all_static()
+        self.discovery.register_group_switches(self.jellyfin.GROUPS)
+        self._publish_group_states()
         
         # Main loop
         logger.info("Starting main loop (poll interval: %ds)", self.config.mqtt_poll_interval)
