@@ -71,7 +71,9 @@ class SystemDiscovery(DiscoveryBase):
         # GET /System/Ping - Ping
         # =====================================================================
         self.binary_sensor("ping", "Server Ping", "system/ping", "mdi:lan-connect", device_class="connectivity", payload_on="true", payload_off="false")
-        self.binary_sensor("status", "Server Status", "status", device_class="connectivity", payload_on="online", payload_off="offline")
+        
+        # Server Status - 3 states: offline, starting, online
+        self.sensor("status", "Server Status", "status", "mdi:server")
         
         # =====================================================================
         # POST /System/Restart - Restart Server

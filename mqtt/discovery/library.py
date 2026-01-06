@@ -140,7 +140,7 @@ class LibraryDiscovery(DiscoveryBase):
         self.sensor(f"{prefix}_library_type", f"{library_name} Library Type", f"{base_topic}/LibraryType", "mdi:tag")
         self.sensor(f"{prefix}_content_type", f"{library_name} Content Type", f"{base_topic}/ContentType", "mdi:tag")
         self.sensor(f"{prefix}_primary_image_item_id", f"{library_name} Primary Image ID", f"{base_topic}/PrimaryImageItemId", "mdi:image")
-        self.binary_sensor(f"{prefix}_refresh_progress", f"{library_name} Refresh Progress", f"{base_topic}/RefreshProgress", "mdi:refresh")
+        self.sensor(f"{prefix}_refresh_progress", f"{library_name} Refresh Progress", f"{base_topic}/RefreshProgress", "mdi:refresh", unit="%")
         self.sensor(f"{prefix}_refresh_status", f"{library_name} Refresh Status", f"{base_topic}/RefreshStatus", "mdi:refresh")
         
         # =====================================================================

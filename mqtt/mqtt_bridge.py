@@ -75,6 +75,7 @@ class MQTTBridge:
             client.subscribe(f"{base}/+/command")
             client.subscribe(f"{base}/+/+/command")
             client.subscribe(f"{base}/groups/+/set")
+            client.subscribe(f"{base}/groups/+/state")  # Read retained states on startup
             client.subscribe(f"{base}/sessions/+/command")
             client.subscribe(f"{base}/sessions/+/+/set")
             logger.info("Subscribed to command topics")
@@ -95,10 +96,20 @@ class MQTTBridge:
         """Handle incoming MQTT messages"""
         topic = msg.topic
         payload = msg.payload.decode('utf-8')
-        logger.info("Command: %s = %s", topic, payload)
         
         try:
             parts = topic.split('/')
+            
+            # Group state restore from retained messages (on startup)
+            if '/groups/' in topic and topic.endswith('/state'):
+                group_name = parts[parts.index('groups') + 1]
+                if hasattr(self, 'jellyfin') and self.jellyfin and group_name in self.jellyfin.GROUPS:
+                    enabled = payload.upper() == 'ON'
+                    self.jellyfin.set_group_enabled(group_name, enabled)
+                    logger.info("Restored group '%s' state: %s", group_name, payload)
+                return  # Don't log state messages as commands
+            
+            logger.info("Command: %s = %s", topic, payload)
             
             # Group switches
             if '/groups/' in topic and topic.endswith('/set'):
@@ -723,7 +734,10 @@ class MQTTBridge:
         signal.signal(signal.SIGTERM, self._signal_handler)
         signal.signal(signal.SIGINT, self._signal_handler)
         
-        # 1. MQTT FIRST - connect before anything else
+        # 1. Initialize API client first (needed for group states from retained messages)
+        self.jellyfin = JellyfinAPI(self.config.jellyfin_host, self.config.jellyfin_api_key)
+        
+        # 2. MQTT connect - retained messages will restore group states
         self.setup_mqtt()
         try:
             self.mqtt_client.connect(self.config.mqtt_host, self.config.mqtt_port, keepalive=60)
@@ -733,16 +747,15 @@ class MQTTBridge:
             logger.error("MQTT connection failed: %s", str(e))
             return 1
         
-        # 2. Publish "starting" status immediately
+        # 3. Publish "starting" status immediately
         self.publish("status", "starting", retain=True)
         logger.info("Published status: starting")
         
-        # 3. Initialize components
-        self.jellyfin = JellyfinAPI(self.config.jellyfin_host, self.config.jellyfin_api_key)
+        # 4. Initialize other components
         self.gpu = get_gpu_monitor()
         self.container = get_container_stats()
         
-        # 4. Wait for Jellyfin API (don't exit on timeout, keep trying)
+        # 5. Wait for Jellyfin API (don't exit on timeout, keep trying)
         logger.info("Waiting for Jellyfin API...")
         jellyfin_ready = False
         wait_count = 0
